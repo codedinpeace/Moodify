@@ -20,11 +20,11 @@ const userSchema = mongoose.Schema({
         required:true,
         minLength:6,
     }
-})
+}, {timestamps:true})
 
-userSchema.pre("save", async (next)=>{
+userSchema.pre("save", async function(next){
     try {
-        if(!isModified('password')) return next()
+        if(!this.isModified('password')) return next()
         this.password = await bcrypt.hash(this.password, 10)
         next()
     } catch (error) {
@@ -32,5 +32,5 @@ userSchema.pre("save", async (next)=>{
     }
 })
 
-const userModel = mongoose.Model('user', userSchema)
+const userModel = mongoose.model('user', userSchema)
 module.exports = userModel
