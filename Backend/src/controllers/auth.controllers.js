@@ -1,4 +1,5 @@
 const createToken = require("../config/create-token")
+const blackListModel = require("../models/blackList.mode")
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
 
@@ -52,7 +53,19 @@ const login = async (req,res) =>{
     }
 }
 const logout = async (req,res) =>{
+    try {
+        const token = req.cookies.token
+        res.cookie("token", "")
 
+        await blackListModel.create({
+            token
+        })
+
+        res.status(200).json({message:"Token created successfully"})
+    } catch (error) {
+        res.status(400).json({message:"Something went wrong"})
+        console.log(error);
+    }
 }
 const check = async (req,res) =>{
 
