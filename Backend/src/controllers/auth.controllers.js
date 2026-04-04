@@ -68,7 +68,14 @@ const logout = async (req,res) =>{
     }
 }
 const check = async (req,res) =>{
-
+    try {
+        const userId = req.user.userId
+        await userModel.findById(userId)
+        res.status(200).json({user})
+    } catch (error) {
+        res.status(400).json({message:"Something went wrong"})
+        console.log(error);
+    }
 }
 
 module.exports = {register, login, logout, check}
