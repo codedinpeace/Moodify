@@ -1,7 +1,7 @@
 const createToken = require("../config/create-token")
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
-const redis = require('redis')
+const redis = require('../config/cache.config')
 
 const register = async (req,res) =>{
     const {username, email, password } = req.body

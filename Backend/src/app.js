@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const connectDB = require('./config/connectDb')
 const authRoutes = require('./routes/auth.routes')
 const redis = require('./config/cache.config')
-require('dotenv').config()
 
 const app = express()
 
