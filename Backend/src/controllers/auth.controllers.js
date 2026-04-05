@@ -1,7 +1,7 @@
 const createToken = require("../config/create-token")
-const blackListModel = require("../models/blackList.mode")
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
+const redis = require('redis')
 
 const register = async (req,res) =>{
     const {username, email, password } = req.body
@@ -55,11 +55,8 @@ const login = async (req,res) =>{
 const logout = async (req,res) =>{
     try {
         const token = req.cookies.token
-        res.cookie("token", "")
-
-        await blackListModel.create({
-            token
-        })
+        res.clearCookie("token")
+        await redis.set(token, Date.now().toString(), "EX", 60*60)
 
         res.status(200).json({message:"Token created successfully"})
     } catch (error) {
@@ -69,8 +66,11 @@ const logout = async (req,res) =>{
 }
 const check = async (req,res) =>{
     try {
+        const token = req.cookies.token
         const userId = req.user.userId
         await userModel.findById(userId)
+        const blackListedToken = await redis.get(token)
+        if(blackListedToken) return res.status(401).json({message:"Token is blacklisted"})
         res.status(200).json({user})
     } catch (error) {
         res.status(400).json({message:"Something went wrong"})

@@ -1,6 +1,7 @@
 const express = require('express')
 const connectDB = require('./config/connectDb')
 const authRoutes = require('./routes/auth.routes')
+const redis = require('./config/cache.config')
 require('dotenv').config()
 
 const app = express()
@@ -10,6 +11,9 @@ app.use(express.json())
 
 // Database
 connectDB()
+
+// Redis
+redis
 
 // routes
 app.use("/api/auth", authRoutes)
