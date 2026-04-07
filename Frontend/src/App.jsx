@@ -1,10 +1,10 @@
 import React from 'react'
-import FaceEmotionDetector from './features/faceDetection/FaceEmotionDetector'
+import Router from './Router'
 
 const App = () => {
   return (
     <div>
-      <FaceEmotionDetector />
+      <Router />
     </div>
   )
 }
