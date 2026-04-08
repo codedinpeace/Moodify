@@ -9,10 +9,14 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const {handleLogin} = useAuth()
 
+    const userData = {
+      identifier: email,
+      password
+    }
 
   async function handleSubmit(e) {
     e.preventDefault()
-    await handleLogin(email, password)
+    await handleLogin(userData)
   }
 
   return (
