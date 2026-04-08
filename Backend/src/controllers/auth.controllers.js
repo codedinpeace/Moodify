@@ -32,7 +32,7 @@ const login = async (req,res) =>{
     const {username,email,password } = req.body
 
     try {
-        const user = await userModel.findOne({$or:[{username}, {email}]})
+        const user = await userModel.findOne({$or:[{username: username ?? null}, {email: email ?? null}]})
         if(!user) return res.status(404).json({message:"user not found"})
 
             const comparedPassword = await bcrypt.compare(password, user.password)

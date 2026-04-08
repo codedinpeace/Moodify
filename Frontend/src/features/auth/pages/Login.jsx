@@ -1,7 +1,12 @@
 import { Mail, Lock, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Login() {
+    
+    const [email, setEmailOrUsername] = useState("")
+    const [password, setPassword] = useState("")
+
   return (
     <div className="min-h-screen bg-[#111] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
@@ -26,6 +31,7 @@ export default function Login() {
           </p>
 
           {/* Fields */}
+            <form >
           <div className="space-y-4">
             <div>
               <label className="block text-[#888] text-[12px] font-medium mb-1.5 tracking-wide">
@@ -37,8 +43,9 @@ export default function Login() {
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-[#555]"
                 />
                 <input
-                  type="email"
-                  placeholder="you@example.com"
+                    
+                  onChange={(e)=>setEmailOrUsername(e.target.value)}
+                  placeholder="email or username"
                   className="w-full bg-[#0e0e0e] border border-[#272727] rounded-[9px] py-2.5 pl-9 pr-3 text-[14px] text-[#e5e5e5] placeholder-[#444] outline-none focus:border-[#444] transition-colors"
                 />
               </div>
@@ -63,6 +70,7 @@ export default function Login() {
                 />
                 <input
                   type="password"
+                  onChange={(e)=>{setPassword(e.target.value)}}
                   placeholder="••••••••"
                   className="w-full bg-[#0e0e0e] border border-[#272727] rounded-[9px] py-2.5 pl-9 pr-3 text-[14px] text-[#e5e5e5] placeholder-[#444] outline-none focus:border-[#444] transition-colors"
                 />
@@ -71,9 +79,10 @@ export default function Login() {
           </div>
 
           {/* CTA */}
-          <button className="w-full mt-6 py-2.5 bg-[#f5f5f5] text-[#111] text-[14px] font-semibold rounded-[9px] hover:bg-white transition-colors">
+          <button type="submit" className="w-full mt-6 py-2.5 bg-[#f5f5f5] text-[#111] text-[14px] font-semibold rounded-[9px] hover:bg-white transition-colors">
             Sign in
           </button>
+    </form>
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-5">

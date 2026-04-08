@@ -3,17 +3,24 @@ const express = require('express')
 const connectDB = require('./config/connectDb')
 const authRoutes = require('./routes/auth.routes')
 const redis = require('./config/cache.config')
+const cors = require('cors')
 
 const app = express()
 
 // middlewares
-app.use(express.json())
+app.use(express.json()) 
 
 // Database
 connectDB()
 
 // Redis
 redis
+
+// cors
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}))
 
 // routes
 app.use("/api/auth", authRoutes)
