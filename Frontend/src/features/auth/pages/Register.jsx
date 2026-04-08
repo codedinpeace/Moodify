@@ -1,7 +1,19 @@
 import { User, Mail, Lock, ShieldCheck, ArrowRight, Check } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Register() {
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const {handleRegister} = useAuth()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await handleRegister(name, email, password)
+  }
 
   return (
     <div className="min-h-screen bg-[#111] flex items-center justify-center px-4">
@@ -19,7 +31,7 @@ export default function Register() {
 
           {/* Body */}
           <div className="px-8 py-7">
-        <form action="">
+        <form onSubmit={handleSubmit}>
             {/* Name row */}
               <div className="mb-5">
                 <label className="block text-[#888] text-[12px] font-medium mb-1.5 tracking-wide">
@@ -28,6 +40,7 @@ export default function Register() {
                 <div className="relative">
                 <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#555]" />
                 <input
+                onChange={(e)=>setName(e.target.value)}
                   type="text"
                   placeholder="John Doe"
                   className="w-full bg-[#0e0e0e] border border-[#272727] rounded-[9px] py-2.5 pl-9 pr-3 text-[14px] text-[#e5e5e5] placeholder-[#444] outline-none focus:border-[#444] transition-colors"
@@ -43,6 +56,7 @@ export default function Register() {
               <div className="relative">
                 <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#555]" />
                 <input
+                onChange={(e)=>setEmail(e.target.value)}
                   type="email"
                   placeholder="you@example.com"
                   className="w-full bg-[#0e0e0e] border border-[#272727] rounded-[9px] py-2.5 pl-9 pr-3 text-[14px] text-[#e5e5e5] placeholder-[#444] outline-none focus:border-[#444] transition-colors"
@@ -58,6 +72,7 @@ export default function Register() {
               <div className="relative mb-5">
                 <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#555]" />
                 <input
+                onChange={(e)=>setPassword(e.target.value)}
                   type="password"
                   placeholder="Create a strong password"
                   className="w-full bg-[#0e0e0e] border border-[#272727] rounded-[9px] py-2.5 pl-9 pr-3 text-[14px] text-[#e5e5e5] placeholder-[#444] outline-none focus:border-[#444] transition-colors"

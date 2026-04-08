@@ -14,8 +14,10 @@ export const useAuth = () => {
             setUser(data)
             setLoggedIn(true)
             setLoading(false)
+            console.log("User logged In")
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
     const handleRegister = async (username, email, password) => {
@@ -27,6 +29,7 @@ export const useAuth = () => {
             setLoading(false)
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
     const handleCheck = async () => {
@@ -38,6 +41,7 @@ export const useAuth = () => {
             setLoading(false)
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
     const handleLogout = async () => {
@@ -49,6 +53,7 @@ export const useAuth = () => {
             setLoading(false)
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
 

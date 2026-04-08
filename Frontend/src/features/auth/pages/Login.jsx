@@ -1,11 +1,19 @@
 import { Mail, Lock, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
     
     const [email, setEmailOrUsername] = useState("")
     const [password, setPassword] = useState("")
+    const {handleLogin} = useAuth()
+
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    await handleLogin(email, password)
+  }
 
   return (
     <div className="min-h-screen bg-[#111] flex items-center justify-center px-4">
@@ -31,7 +39,7 @@ export default function Login() {
           </p>
 
           {/* Fields */}
-            <form >
+            <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
               <label className="block text-[#888] text-[12px] font-medium mb-1.5 tracking-wide">
