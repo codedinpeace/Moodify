@@ -6,9 +6,11 @@ const App = () => {
 
   const {handleCheck} = useAuth()
 
-  useEffect(()=>{ 
-    handleCheck()
-  }, [])
+  useEffect(()=>{
+    (async ()=>{
+      await handleCheck()
+    })();
+  },[])
 
   return (
     <div>

@@ -11,37 +11,40 @@ export const useAuth = () => {
         try {
             setLoading(true)
             const data = await login(userData)
-            setUser(data)
+            setUser(data.user)
             setLoggedIn(true)
             setLoading(false)
             console.log("User logged In")
         } catch (error) {
             console.log(error)
             setLoading(false)
+            setLoggedIn(false)
         }
     }
     const handleRegister = async (username, email, password) => {
         try {
             setLoading(true)
             const data = await register(username, email, password)
-            setUser(data)
+            setUser(data.user)
             setLoggedIn(true)
             setLoading(false)
         } catch (error) {
             console.log(error)
             setLoading(false)
+            setLoggedIn(false)
         }
     }
     const handleCheck = async () => {
         try {
             setLoading(true)
             const data = await check()
-            setUser(data)
+            setUser(data.user)
             setLoggedIn(true)
             setLoading(false)
         } catch (error) {
             console.error(error.message)
             setLoading(false)
+            setLoggedIn(false)
         }
     }
     const handleLogout = async () => {
@@ -54,6 +57,7 @@ export const useAuth = () => {
         } catch (error) {
             console.log(error)
             setLoading(false)
+            setLoggedIn(false)
         }
     }
 

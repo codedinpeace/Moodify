@@ -68,6 +68,8 @@ const check = async (req,res) =>{
     try {
         const token = req.cookies.token
         const userId = req.user.userId
+        console.log(userId)
+        if(!userId) return res.status(409).json({message:"Unauthorized"})
         const user = await userModel.findById(userId)
         const blackListedToken = await redis.get(token)
         if(blackListedToken) return res.status(401).json({message:"Token is blacklisted"})
