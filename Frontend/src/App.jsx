@@ -7,7 +7,7 @@ const App = () => {
   const {handleCheck} = useAuth()
 
   useEffect(()=>{
-    (async ()=>{
+    (async ()=>{  
       await handleCheck()
     })();
   },[])
