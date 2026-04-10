@@ -40,7 +40,7 @@ export const useAuth = () => {
             setLoggedIn(true)
             setLoading(false)
         } catch (error) {
-            console.log(error)
+            console.error(error.message)
             setLoading(false)
         }
     }

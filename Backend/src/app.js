@@ -4,6 +4,7 @@ const connectDB = require('./config/connectDb')
 const authRoutes = require('./routes/auth.routes')
 const redis = require('./config/cache.config')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use((req, res, next) => {
 
 // middlewares
 app.use(express.json()) 
+app.use(cookieParser())
 
 // Database
 connectDB()

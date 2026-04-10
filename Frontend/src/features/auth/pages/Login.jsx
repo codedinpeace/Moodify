@@ -1,13 +1,17 @@
 import { Mail, Lock, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { AuthContext } from "../context/auth.context";
 
 export default function Login() {
     
     const [email, setEmailOrUsername] = useState("")
     const [password, setPassword] = useState("")
     const {handleLogin} = useAuth()
+    const context = useContext(AuthContext)
+
+    const {loading, isLoggedIn, user} = context
 
     const userData = {
       identifier: email,
@@ -17,6 +21,8 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
     await handleLogin(userData)
+
+    console.log(loading, isLoggedIn, user)
   }
 
   return (
